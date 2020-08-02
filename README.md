@@ -30,7 +30,8 @@ dive into the differences if you want to :-).
 ![Falling Bricks](docs/falling_bricks.png)
 
 
-# Controls
+# Controls
+
 | Key | Action |
 |-----|--------|
 | Left arrow | Move left |

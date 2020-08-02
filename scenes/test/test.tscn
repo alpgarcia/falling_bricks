@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/test/test.gd" type="Script" id=1]
+[ext_resource path="res://scenes/main/main.tscn" type="PackedScene" id=2]
+
+[node name="Test" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" parent="." instance=ExtResource( 2 )]
+
+[node name="ShapeLabel" type="Label" parent="."]
+margin_left = 191.5
+margin_top = 32.0
+margin_right = 231.5
+margin_bottom = 46.0
+
+[node name="Grid" type="Label" parent="."]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 232.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickShape" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 112.0
+margin_bottom = 52.0
+text = "Pick a Shape"
+
+[node name="RotateLeft" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 72.0
+margin_right = 113.0
+margin_bottom = 92.0
+text = "Rotate Left"
+
+[node name="RotateRight" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 112.0
+margin_right = 121.0
+margin_bottom = 132.0
+text = "Rotate Right"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaceShape" type="Button" parent="."]
+margin_left = 34.0
+margin_top = 192.0
+margin_right = 123.0
+margin_bottom = 212.0
+text = "Place Shape"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemoveShape" type="Button" parent="."]
+margin_left = 34.0
+margin_top = 224.0
+margin_right = 140.0
+margin_bottom = 244.0
+text = "Remove Shape"
+
+[node name="Lock" type="Button" parent="."]
+margin_left = 34.0
+margin_top = 256.0
+margin_right = 75.0
+margin_bottom = 276.0
+text = "Lock"
+
+[node name="SpinBox" type="SpinBox" parent="."]
+margin_left = 168.0
+margin_top = 192.0
+margin_right = 242.0
+margin_bottom = 216.0
+min_value = -10.0
+max_value = 210.0
+value = 35.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="PickShape" to="." method="_on_PickShape_button_down"]
+[connection signal="button_down" from="RotateLeft" to="." method="_on_RotateLeft_button_down"]
+[connection signal="button_down" from="RotateRight" to="." method="_on_RotateRight_button_down"]
+[connection signal="button_down" from="PlaceShape" to="." method="_on_PlaceShape_button_down"]
+[connection signal="button_down" from="RemoveShape" to="." method="_on_RemoveShape_button_down"]
+[connection signal="button_down" from="Lock" to="." method="_on_Lock_button_down"]

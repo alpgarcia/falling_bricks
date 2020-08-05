@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/gui/gui.gd" type="Script" id=1]
 [ext_resource path="res://assets/tile.png" type="Texture" id=2]
 [ext_resource path="res://assets/square.png" type="Texture" id=3]
+
+[sub_resource type="Theme" id=1]
 
 [node name="GUI" type="CenterContainer"]
 anchor_left = 0.5
@@ -17,24 +19,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 121.0
-margin_right = 610.0
-margin_bottom = 393.0
+margin_top = 54.0
+margin_right = 614.0
+margin_bottom = 320.0
 size_flags_horizontal = 0
+alignment = 1
 
 [node name="Left" type="CenterContainer" parent="HBoxContainer"]
 margin_right = 200.0
-margin_bottom = 393.0
+margin_bottom = 266.0
 rect_min_size = Vector2( 200, 0 )
 
 [node name="VBox" type="VBoxContainer" parent="HBoxContainer/Left"]
 margin_left = 29.0
 margin_right = 171.0
-margin_bottom = 393.0
+margin_bottom = 266.0
 custom_constants/separation = 20
 
 [node name="Statistics" type="GridContainer" parent="HBoxContainer/Left/VBox"]
@@ -94,85 +98,22 @@ margin_right = 142.0
 margin_bottom = 74.0
 text = "999"
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/Left/VBox"]
+[node name="NewGame" type="Button" parent="HBoxContainer/Left/VBox"]
 margin_top = 94.0
 margin_right = 142.0
-margin_bottom = 201.0
-
-[node name="Next" type="GridContainer" parent="HBoxContainer/Left/VBox/CenterContainer"]
-margin_left = 44.0
-margin_right = 97.0
-margin_bottom = 107.0
-custom_constants/vseparation = 1
-custom_constants/hseparation = 1
-columns = 2
-
-[node name="Cell" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_right = 26.0
-margin_bottom = 26.0
-texture = ExtResource( 2 )
-
-[node name="Cell2" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_left = 27.0
-margin_right = 53.0
-margin_bottom = 26.0
-texture = ExtResource( 2 )
-
-[node name="Cell3" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_top = 27.0
-margin_right = 26.0
-margin_bottom = 53.0
-texture = ExtResource( 2 )
-
-[node name="Cell4" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_left = 27.0
-margin_top = 27.0
-margin_right = 53.0
-margin_bottom = 53.0
-texture = ExtResource( 2 )
-
-[node name="Cell5" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_top = 54.0
-margin_right = 26.0
-margin_bottom = 80.0
-texture = ExtResource( 2 )
-
-[node name="Cell6" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_left = 27.0
-margin_top = 54.0
-margin_right = 53.0
-margin_bottom = 80.0
-texture = ExtResource( 2 )
-
-[node name="Cell7" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_top = 81.0
-margin_right = 26.0
-margin_bottom = 107.0
-texture = ExtResource( 2 )
-
-[node name="Cell8" type="TextureRect" parent="HBoxContainer/Left/VBox/CenterContainer/Next"]
-margin_left = 27.0
-margin_top = 81.0
-margin_right = 53.0
-margin_bottom = 107.0
-texture = ExtResource( 2 )
-
-[node name="NewGame" type="Button" parent="HBoxContainer/Left/VBox"]
-margin_top = 221.0
-margin_right = 142.0
-margin_bottom = 241.0
+margin_bottom = 114.0
 text = "New Game"
 
 [node name="Pause" type="Button" parent="HBoxContainer/Left/VBox"]
-margin_top = 261.0
+margin_top = 134.0
 margin_right = 142.0
-margin_bottom = 281.0
+margin_bottom = 154.0
 text = "Pause"
 
 [node name="MusicContainer" type="HBoxContainer" parent="HBoxContainer/Left/VBox"]
-margin_top = 301.0
+margin_top = 174.0
 margin_right = 142.0
-margin_bottom = 317.0
+margin_bottom = 190.0
 
 [node name="MusicLabel" type="Label" parent="HBoxContainer/Left/VBox/MusicContainer"]
 margin_top = 1.0
@@ -190,9 +131,9 @@ step = 0.0
 value = 1.0
 
 [node name="SoundContainer" type="HBoxContainer" parent="HBoxContainer/Left/VBox"]
-margin_top = 337.0
+margin_top = 210.0
 margin_right = 142.0
-margin_bottom = 353.0
+margin_bottom = 226.0
 
 [node name="SoundLabel" type="Label" parent="HBoxContainer/Left/VBox/SoundContainer"]
 margin_top = 1.0
@@ -210,116 +151,253 @@ step = 0.0
 value = 1.0
 
 [node name="About" type="Button" parent="HBoxContainer/Left/VBox"]
-margin_top = 373.0
+margin_top = 246.0
 margin_right = 142.0
-margin_bottom = 393.0
+margin_bottom = 266.0
 text = "About"
 
-[node name="Right" type="MarginContainer" parent="HBoxContainer"]
+[node name="Center" type="MarginContainer" parent="HBoxContainer"]
 margin_left = 204.0
 margin_right = 489.0
-margin_bottom = 393.0
+margin_bottom = 266.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 
-[node name="BackColor" type="ColorRect" parent="HBoxContainer/Right"]
+[node name="BackColor" type="ColorRect" parent="HBoxContainer/Center"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 277.0
-margin_bottom = 385.0
+margin_bottom = 258.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="BackGrid" type="GridContainer" parent="HBoxContainer/Right"]
+[node name="BackGrid" type="GridContainer" parent="HBoxContainer/Center"]
 modulate = Color( 0.67451, 0.670588, 0.670588, 1 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 277.0
-margin_bottom = 385.0
+margin_bottom = 258.0
 custom_constants/vseparation = 1
 custom_constants/hseparation = 1
 columns = 10
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Right/BackGrid"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Center/BackGrid"]
 modulate = Color( 1, 1, 1, 0.192157 )
 margin_right = 26.0
 margin_bottom = 26.0
 texture = ExtResource( 3 )
 
-[node name="Grid" type="GridContainer" parent="HBoxContainer/Right"]
+[node name="Grid" type="GridContainer" parent="HBoxContainer/Center"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 277.0
-margin_bottom = 385.0
+margin_bottom = 258.0
 custom_constants/vseparation = 1
 custom_constants/hseparation = 1
 columns = 10
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_right = 26.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 27.0
 margin_right = 53.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 54.0
 margin_right = 80.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 81.0
 margin_right = 107.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 108.0
 margin_right = 134.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect6" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 135.0
 margin_right = 161.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect7" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect7" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 162.0
 margin_right = 188.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect8" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect8" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 189.0
 margin_right = 215.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect9" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect9" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 216.0
 margin_right = 242.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
-[node name="TextureRect10" type="TextureRect" parent="HBoxContainer/Right/Grid"]
+[node name="TextureRect10" type="TextureRect" parent="HBoxContainer/Center/Grid"]
 margin_left = 243.0
 margin_right = 269.0
 margin_bottom = 26.0
 texture = ExtResource( 2 )
 
+[node name="Right" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 493.0
+margin_right = 614.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 107, 266 )
+
+[node name="Label" type="Label" parent="HBoxContainer/Right"]
+margin_right = 121.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 121, 0 )
+theme = SubResource( 1 )
+text = "Next Shape"
+align = 1
+
+[node name="NextContainer" type="PanelContainer" parent="HBoxContainer/Right"]
+margin_top = 18.0
+margin_right = 121.0
+margin_bottom = 139.0
+rect_min_size = Vector2( 121, 121 )
+
+[node name="Next" type="GridContainer" parent="HBoxContainer/Right/NextContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 114.0
+margin_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
+columns = 4
+
+[node name="Cell" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_right = 26.0
+margin_bottom = 26.0
+texture = ExtResource( 2 )
+
+[node name="Cell2" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 27.0
+margin_right = 53.0
+margin_bottom = 26.0
+texture = ExtResource( 2 )
+
+[node name="Cell3" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 54.0
+margin_right = 80.0
+margin_bottom = 26.0
+texture = ExtResource( 2 )
+
+[node name="Cell4" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 81.0
+margin_right = 107.0
+margin_bottom = 26.0
+texture = ExtResource( 2 )
+
+[node name="Cell5" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_top = 27.0
+margin_right = 26.0
+margin_bottom = 53.0
+texture = ExtResource( 2 )
+
+[node name="Cell6" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 27.0
+margin_top = 27.0
+margin_right = 53.0
+margin_bottom = 53.0
+texture = ExtResource( 2 )
+
+[node name="Cell7" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 54.0
+margin_top = 27.0
+margin_right = 80.0
+margin_bottom = 53.0
+texture = ExtResource( 2 )
+
+[node name="Cell8" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 81.0
+margin_top = 27.0
+margin_right = 107.0
+margin_bottom = 53.0
+texture = ExtResource( 2 )
+
+[node name="Cell9" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_top = 54.0
+margin_right = 26.0
+margin_bottom = 80.0
+texture = ExtResource( 2 )
+
+[node name="Cell10" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 27.0
+margin_top = 54.0
+margin_right = 53.0
+margin_bottom = 80.0
+texture = ExtResource( 2 )
+
+[node name="Cell11" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 54.0
+margin_top = 54.0
+margin_right = 80.0
+margin_bottom = 80.0
+texture = ExtResource( 2 )
+
+[node name="Cell12" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 81.0
+margin_top = 54.0
+margin_right = 107.0
+margin_bottom = 80.0
+texture = ExtResource( 2 )
+
+[node name="Cell13" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_top = 81.0
+margin_right = 26.0
+margin_bottom = 107.0
+texture = ExtResource( 2 )
+
+[node name="Cell14" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 27.0
+margin_top = 81.0
+margin_right = 53.0
+margin_bottom = 107.0
+texture = ExtResource( 2 )
+
+[node name="Cell15" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 54.0
+margin_top = 81.0
+margin_right = 80.0
+margin_bottom = 107.0
+texture = ExtResource( 2 )
+
+[node name="Cell16" type="TextureRect" parent="HBoxContainer/Right/NextContainer/Next"]
+margin_left = 81.0
+margin_top = 81.0
+margin_right = 107.0
+margin_bottom = 107.0
+texture = ExtResource( 2 )
+
 [node name="AboutDialog" type="AcceptDialog" parent="."]
-margin_left = 228.0
-margin_top = 99.0
-margin_right = 503.0
-margin_bottom = 293.0
+margin_left = 169.0
+margin_top = 90.0
+margin_right = 444.0
+margin_bottom = 284.0
 window_title = "Falling Blocks"
 dialog_text = "## Controls
 

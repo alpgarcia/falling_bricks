@@ -23,10 +23,9 @@ var lines: int = 0 setget set_lines
 var score: int = 0 setget set_score
 var hi_score: int = 0 setget set_hi_score
 
-onready var play_area_grid := $HBoxContainer/Right/Grid as GridContainer
-onready var back_grid := $HBoxContainer/Right/BackGrid as GridContainer
-onready var next_grid := $HBoxContainer/Left/VBox/CenterContainer/Next \
-		as GridContainer
+onready var play_area_grid := $HBoxContainer/Center/Grid as GridContainer
+onready var back_grid := $HBoxContainer/Center/BackGrid as GridContainer
+onready var next_grid := $HBoxContainer/Right/NextContainer/Next as GridContainer
 onready var about := $AboutDialog as AcceptDialog
 onready var new_game_button := $HBoxContainer/Left/VBox/NewGame as Button
 onready var pause_button := $HBoxContainer/Left/VBox/Pause as Button
@@ -109,17 +108,28 @@ func clear_all_cells() -> void:
 
 
 func set_next_shape(shape: ShapeData) -> void:
-	# Draws the shape rotated 90º to the next shape grid.
+	# Draws the shape to the next shape grid.
+	
+	# Remove previous cells (leave the first one intact
+	# as it is used by `add_cells` to duplicate and create
+	# the rest)
+	# TODO once `add_cells` is npt based on duplicating an existing cell
+	# 	we can remove all cells here. 
+	for i in range(1, next_grid.get_child_count()):
+		next_grid.remove_child(next_grid.get_child(i))
+	
+	var num_rows := shape.grid.size()
+	var num_cols := shape.coords.size()
+	
+	next_grid.set_columns(num_cols)
+	add_cells(next_grid, num_rows * num_cols)
 	clear_cells(next_grid)
 	
-	var i := 0
-	for col in shape.coords.size():
-		# By default all shapes are created horizontally, so they are
-		# displayed entirely within the first 2 rows
-		for row in 2:
+	for row in num_rows:
+		for col in num_cols:
+			var grid_pos: int = (row * num_cols) + col
 			if shape.grid[row][col]:
-				next_grid.get_child(i).modulate = shape.color
-			i += 1
+				next_grid.get_child(grid_pos).modulate = shape.color
 
 
 func set_button_state(button: Button, state: bool) -> void:

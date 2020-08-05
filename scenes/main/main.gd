@@ -26,9 +26,9 @@ const TICK_SPEED := 1.0
 const FAST_MULTIPLE := 10
 
 const WAIT_TIME := 0.15
-const REPEAT_DELAY := 0.05
+const REPEAT_DELAY := 0.025
 const CLEANING_DELAY := 0.3
-const LOCK_DELAY := 1.0
+const LOCK_DELAY := 0.1
 
 var state = GameState.STOPPED
 var music_position := 0.0
@@ -57,7 +57,7 @@ func _ready() -> void:
 	gui.reset_stats()
 	
 
-func _input(event):
+func _input(event) -> void:
 	if state == GameState.PLAYING:
 		if event.is_action_pressed("ui_page_up"):
 			increase_level()
@@ -244,7 +244,7 @@ func _check_lock_timer(moved: bool) -> void:
 	# A succesful move gives extra moving time to undo the
 	# movement or perform new ones.
 	if moved and not lock_timer.is_stopped():
-		lock_timer.start(LOCK_DELAY)	
+		_lock_time()
 
 func _remove_rows(index: int, rows: int) -> void:
 	add_to_score(rows)
@@ -277,7 +277,7 @@ func _remove_rows(index: int, rows: int) -> void:
 		
 
 func sleep(value := true):
-	get_tree().paused = value
+#	get_tree().paused = value
 	if value:
 		ticker.stop()
 	else:
@@ -446,7 +446,7 @@ func _start_game() -> void:
 	new_shape()
 
 
-func _pause_game():
+func _pause_game() -> void:
 	if state == GameState.PLAYING:
 		print("Game paused.")
 		state = GameState.PAUSED
@@ -501,7 +501,7 @@ func _on_GUI_button_pressed(action: int) -> void:
 			print("Sound changed. Level: %f db" % gui.sound_db)
 
 
-func _on_Ticker_timeout():
+func _on_Ticker_timeout() -> void:
 #	print("Ticker. Pos %d - Row: %d Col: %d" %
 #			 [pos, (pos / cols), (pos % cols)])
 	var new_pos = pos + cols
@@ -522,7 +522,7 @@ func _on_Ticker_timeout():
 			# This way we make sure it is always consumed,
 			# so we won't start the timer again.
 			lock_timer_consumed = true
-			lock_timer.start(LOCK_DELAY)
+			_lock_time()
 		
 		# once the lock timer is stopped and we are sure the user consumed 
 		# this extra time, the shape will be locked to the grid.
@@ -547,17 +547,25 @@ func _on_Ticker_timeout():
 			new_shape()
 
 
-func _on_LeftTimer_timeout():
+func _on_LeftTimer_timeout() -> void:
 	left_timer.wait_time = REPEAT_DELAY
 	move_left()
 
 
-func _on_RightTimer_timeout():
+func _on_RightTimer_timeout() -> void:
 	right_timer.wait_time = REPEAT_DELAY
 	move_right()
 
 
-func _on_LockTimer_timeout():
+func _lock_time() -> void:
+	var lock_after := LOCK_DELAY * gui.level
+	if gui.level > 7:
+		lock_after = LOCK_DELAY * 7
+		
+	lock_timer.start(lock_after)
+
+
+func _on_LockTimer_timeout() -> void:
 	lock_timer.stop()
 	
 	

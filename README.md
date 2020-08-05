@@ -1,5 +1,22 @@
 # Falling Bricks
 
+![Falling Bricks](docs/falling_bricks.png)
+
+
+# Controls
+
+| Key | Action |
+|-----|--------|
+| Left arrow | Move left |
+| Right arrow | Move right |
+| Down arrow | Fast drop |
+| Up arrow | Hard drop |
+| d | Rotate clockwise |
+| s | Roatate counter-clockwise |
+| Page up | Increase level |
+
+## Acknowledgements
+
 The goal of this project is learning about game programming using
 [Godot](https://godotengine.org/) by following
 [the Godot Game Development Tutorial (Tetron)](https://www.youtube.com/playlist?list=PLFTE4-k_Qh3tfkbsapJdRBmU0Y8gze_dl)
@@ -26,18 +43,3 @@ original code explained in the tutorial. In case you are here trying to find a d
 [Tetron repository](https://github.com/andrew-wilkes/tetron).
 I'll try to document the game mechanics and options I implement, and let you
 dive into the differences if you want to :-).
-
-![Falling Bricks](docs/falling_bricks.png)
-
-
-# Controls
-
-| Key | Action |
-|-----|--------|
-| Left arrow | Move left |
-| Right arrow | Move right |
-| Down arrow | Fast drop |
-| Up arrow | Hard drop |
-| d | Rotate clockwise |
-| s | Roatate counter-clockwise |
-| Page up | Increase level |

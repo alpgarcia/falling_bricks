@@ -41,6 +41,10 @@ var pos := 0
 var count := 0
 var bonus := 0
 
+export var shadow: bool = true
+var shadow_pos: int
+var shadow_bonus: int
+
 var lock_timer_consumed := false
 
 onready var gui := $GUI as GUI
@@ -118,7 +122,7 @@ func clear_grid() -> void:
 
 func add_to_score(rows_cleared: int) -> void:
 	gui.lines += rows_cleared
-	var rows_score = 10 * int(pow(2, rows_cleared - 1))
+	var rows_score = (10 + shadow_bonus) * int(pow(2, rows_cleared - 1))
 	gui.score += rows_score
 	print("Added %d to score." % rows_score)
 	update_high_score()
@@ -168,6 +172,7 @@ func new_shape() -> void:
 	gui.set_next_shape(next_shape)
 	pos = START_POS
 	add_shape_to_grid()
+	_shadow(pos)
 	normal_drop()
 	level_up()
 
@@ -205,6 +210,7 @@ func move_shape(new_pos: int, dir := Rotate.NONE) -> bool:
 	# Remove the shape from the grid so their own tiles doesn't
 	# prevent the movement
 	remove_shape_from_grid()
+	_remove_shadow_from_grid()
 	
 #	print("New Pos %d - Row: %d Col: %d" %
 #			 [new_pos, (new_pos / cols), (new_pos % cols)])
@@ -219,7 +225,8 @@ func move_shape(new_pos: int, dir := Rotate.NONE) -> bool:
 	else:
 		# warning-ignore:return_value_discarded
 		rotate(undo_dir)
-		
+	
+	_shadow(pos)
 	add_shape_to_grid()
 	
 	return valid
@@ -431,6 +438,31 @@ func _place_shape(index: int, add_tiles := false, lock := false,
 	return valid
 
 
+func _shadow(from_pos: int) -> void:
+	
+	if not shadow:
+		return
+	
+	var next_pos := from_pos
+	while(is_valid(next_pos)):
+		next_pos += cols
+	
+	shadow_pos = next_pos - cols
+	
+	var color: Color = shape.color
+	color.a = .4
+	# warning-ignore:return_value_discarded
+	_place_shape(shadow_pos, true, false, color)
+
+
+func _remove_shadow_from_grid() -> void:
+	if not shadow:
+		return
+	
+	# warning-ignore:return_value_discarded
+	_place_shape(shadow_pos, true)
+
+
 func _start_game() -> void:
 	print("Game playing.")
 	gui.set_button_states(DISABLED)
@@ -442,6 +474,8 @@ func _start_game() -> void:
 	
 	clear_grid()
 	gui.reset_stats(gui.hi_score)
+	
+	shadow_bonus = 0 if shadow else 5
 	
 	new_shape()
 
@@ -470,6 +504,9 @@ func _game_over() -> void:
 	_pause_music()
 	state = GameState.STOPPED
 	print("Game Stopped.")
+	
+	if shadow_pos <= END_POS:
+		_remove_shadow_from_grid()
 
 
 func _pause_music() -> void:

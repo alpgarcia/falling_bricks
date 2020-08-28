@@ -30,6 +30,8 @@ const REPEAT_DELAY := 0.025
 const CLEANING_DELAY := 0.3
 const LOCK_DELAY := 0.1
 
+const HARD_DROP_BONUS := 10
+
 var state = GameState.STOPPED
 var music_position := 0.0
 
@@ -201,6 +203,15 @@ func soft_drop() -> void:
 
 func hard_drop() -> void:
 	ticker.stop()
+	
+	move_shape(shadow_pos)
+	pos = shadow_pos
+	gui.score += HARD_DROP_BONUS
+	update_high_score()
+	
+	# Player won't be able to move shape after a hard drop
+	lock_timer_consumed = true
+	
 	ticker.start(TICK_SPEED / 1000)
 
 

@@ -518,9 +518,6 @@ func _game_over() -> void:
 	_pause_music()
 	state = GameState.STOPPED
 	print("Game Stopped.")
-	
-	if shadow_pos <= END_POS:
-		_remove_shadow_from_grid()
 
 
 func _pause_music() -> void:

@@ -146,6 +146,7 @@ func move_left() -> void:
 	
 	if (pos + shift) % cols > 0:
 		# TODO play a sound if can/can't move?
+		# warning-ignore:return_value_discarded
 		move_shape(pos - 1)
 
 
@@ -160,6 +161,7 @@ func move_right() -> void:
 	
 	if (pos + shift) % cols < cols - 1:
 		# TODO play a sound if can/can't move?
+		# warning-ignore:return_value_discarded
 		move_shape(pos + 1)
 
 
@@ -204,6 +206,7 @@ func soft_drop() -> void:
 func hard_drop() -> void:
 	ticker.stop()
 	
+	# warning-ignore:return_value_discarded
 	move_shape(shadow_pos)
 	pos = shadow_pos
 	gui.score += HARD_DROP_BONUS
